@@ -1,0 +1,18 @@
+{
+  "name": "virtual-vending-machine-app",
+  "version": "1.0.0",
+  "description": "Virtual Vending Machine Web App Vue + Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "lokijs": "^1.5.12"
+  }
+}
