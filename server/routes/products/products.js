@@ -6,7 +6,7 @@ const db = require("../../utils/database/database");
 router.get("/", async (req, res) => {
   try {
     const products = await db.GetProducts();
-    res.status(200).send(products);
+    res.status(200).json(products);
   } catch (err) {
     res.status(500).send("500 Internal Server Error!");
   }

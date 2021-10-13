@@ -51,9 +51,22 @@ const GetProduct = async (id) => {
 
 // Method to decrease product qty by id
 const CheckoutProduct = async (id) => {
+  var soldOut = false;
   await users.findAndUpdate({ product_id: id }, (product) => {
-    if (product.quantity === 0) throw "Invalid Operation!";
+    if (product.quantity == 0) {
+      soldOut = true;
+      return;
+    }
     product.quantity -= 1;
+  });
+  db.saveDatabase();
+  return soldOut;
+};
+
+// Method to update product
+const UpdateProduct = async (product) => {
+  await users.findAndUpdate({ product_id: product.product_id }, (entity) => {
+    entity = product;
   });
   db.saveDatabase();
 };
@@ -61,3 +74,4 @@ const CheckoutProduct = async (id) => {
 module.exports.GetProducts = GetProducts;
 module.exports.GetProduct = GetProduct;
 module.exports.CheckoutProduct = CheckoutProduct;
+module.exports.UpdateProduct = UpdateProduct;
