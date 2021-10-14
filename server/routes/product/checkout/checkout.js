@@ -1,7 +1,11 @@
 const fs = require("fs");
+const util = require("util");
 const express = require("express");
 const router = express.Router();
 const db = require("../../../utils/database/database");
+
+// Native promisify
+const writeFile = util.promisify(fs.writeFile);
 
 // Products array
 const products = [
@@ -43,7 +47,7 @@ router.get("/:id", async (req, res) => {
         return p.product_id == req.params.id;
       })[0]
     );
-    fs.writeFileSync(
+    await writeFile(
       __dirname + "/checkout.json",
       checkedOutProduct,
       (error) => {
