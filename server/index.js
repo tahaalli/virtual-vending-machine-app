@@ -4,7 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
-const port = process.env.SERVER_PORT || 3001;
+const port = process.env.SERVER_PORT || 3000;
 
 // Import routes
 const products = require("./routes/products/products");
