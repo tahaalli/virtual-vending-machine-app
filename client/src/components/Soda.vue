@@ -1,12 +1,18 @@
 <template>
-  <div class="card" style="width: 10rem">
+  <div class="card" style="width: 15rem">
     <img
       v-bind:src="getImgUrl(data.product_id)"
       alt="Soda Image"
       class="card-img-top"
     />
     <div class="card-body">
-      <span class="card-text">{{ data.product_description }}</span>
+      <div class="d-flex flex-row justify-content-between">
+        <span class="card-text"
+          ><b>{{ data.product_name }}</b></span
+        >
+        <span class="badge rounded-pill bg-dark">${{ data.cost }}</span>
+      </div>
+      <div>{{ data.product_description }}</div>
     </div>
   </div>
 </template>

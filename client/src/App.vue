@@ -1,21 +1,28 @@
 <template>
   <div id="app">
     <Navbar />
-    <Soda
-      :data="{ product_id: 'cola', product_description: 'Some text here' }"
-    />
+    <div class="container ">
+      <div class="card">
+        <div class="card-body">
+          <Sodas :sodas="sodas" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue";
-import Soda from "./components/Soda.vue";
+import Sodas from "./components/Sodas.vue";
 
 export default {
   name: "App",
+  data() {
+    return { sodas: [{ cost: 1 }, { cost: 2 }, { cost: 3 }] };
+  },
   components: {
     Navbar,
-    Soda,
+    Sodas,
   },
 };
 </script>
