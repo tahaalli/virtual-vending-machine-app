@@ -7,14 +7,16 @@ var users = db.addCollection("products");
 // Insert initial products
 users.insert([
   {
+    id: 0,
     product_id: "fizz",
     product_name: "Fizz",
     description:
       "An effervescent fruity experience with hints of grape and coriander.",
     cost: 1,
-    quantity: 100,
+    quantity: 0,
   },
   {
+    id: 1,
     product_id: "pop",
     product_name: "Pop",
     description: "An explosion of flavor that will knock your socks off!",
@@ -22,6 +24,7 @@ users.insert([
     quantity: 100,
   },
   {
+    id: 2,
     product_id: "cola",
     product_name: "Cola",
     description:
@@ -30,6 +33,7 @@ users.insert([
     quantity: 200,
   },
   {
+    id: 3,
     product_id: "mega_pop",
     product_name: "Mega Pop",
     description:
