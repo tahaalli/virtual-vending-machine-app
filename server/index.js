@@ -12,6 +12,8 @@ const product = require("./routes/product/product");
 const checkout = require("./routes/product/checkout/checkout");
 const restock = require("./routes/product/restock/restock");
 const price = require("./routes/product/price/price");
+const balance = require("./routes/session/balance/balance");
+const auth = require("./routes/session/auth/auth");
 // Middlewares
 app.use(helmet());
 app.use(express.json());
@@ -24,6 +26,8 @@ app.use("/api/product", product);
 app.use("/api/product/checkout", checkout);
 app.use("/api/product/restock", restock);
 app.use("/api/product/price", price);
+app.use("/api/session/balance", balance);
+app.use("/api/session/auth", auth);
 // Ping server
 app.get("/api", (req, res) => {
   res.status(200).send("OK");

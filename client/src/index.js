@@ -4,10 +4,11 @@ import reportWebVitals from "./reportWebVitals";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Machine from "./components/Machine/Machine";
+import Dashboard from "./components/Dashboard/Dashboard";
 import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Router>
       <Navbar />
       <Switch>
@@ -15,11 +16,11 @@ ReactDOM.render(
           <Machine />
         </Route>
         <Route exact path="/admin">
-          Admin
+          <Dashboard />
         </Route>
       </Switch>
     </Router>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById("root")
 );
 

@@ -3,9 +3,20 @@ const loki = require("lokijs");
 // Create db file
 var db = new loki("db.json");
 // Add products collection
-var users = db.addCollection("products");
+var products = db.addCollection("products");
+var session = db.addCollection("session");
+// Auth token
+// TODO: Replace with JWT auth logic
+const authToken =
+  "6BEC23F8C9B40B2DAD43693E5BF8926E0214D88000383E9CFC63050847CF1C1B";
+// Insert initial session
+session.insertOne({
+  id: "session",
+  balance: 0.0,
+  token: "",
+});
 // Insert initial products
-users.insert([
+products.insert([
   {
     id: 0,
     product_id: "fizz",
@@ -45,18 +56,18 @@ users.insert([
 
 // Method to get available products
 const GetProducts = async () => {
-  return await users.find({ quantity: { $gte: 0 } });
+  return await products.find({ quantity: { $gte: 0 } });
 };
 
 // Method to get product by id
 const GetProduct = async (id) => {
-  return await users.findOne({ product_id: id });
+  return await products.findOne({ product_id: id });
 };
 
 // Method to decrease product qty by id
 const CheckoutProduct = async (id) => {
   var soldOut = false;
-  await users.findAndUpdate({ product_id: id }, (product) => {
+  await products.findAndUpdate({ product_id: id }, (product) => {
     if (product.quantity == 0) {
       soldOut = true;
       return;
@@ -69,13 +80,41 @@ const CheckoutProduct = async (id) => {
 
 // Method to update product
 const UpdateProduct = async (product) => {
-  await users.findAndUpdate({ product_id: product.product_id }, (entity) => {
+  await products.findAndUpdate({ product_id: product.product_id }, (entity) => {
     entity = product;
   });
   db.saveDatabase();
+};
+
+// Method to get session balance
+const GetBalance = async () => {
+  const _session = await session.findOne({ id: "session" });
+  return _session.balance;
+};
+
+// Method to set session balance
+const UpdateBalance = async (balance) => {
+  await session.findAndUpdate({ id: "session" }, (p) => (p.balance = balance));
+  db.saveDatabase();
+};
+
+// Metho to set session auth token
+const SetAuthToken = async (token) => {
+  await session.findAndUpdate({ id: "session" }, (p) => (p.token = token));
+  db.saveDatabase();
+};
+
+// Method to auth user as admin
+const AuthUser = async () => {
+  const _session = await session.findOne({ id: "session" });
+  return _session.token === authToken;
 };
 
 module.exports.GetProducts = GetProducts;
 module.exports.GetProduct = GetProduct;
 module.exports.CheckoutProduct = CheckoutProduct;
 module.exports.UpdateProduct = UpdateProduct;
+module.exports.GetBalance = GetBalance;
+module.exports.UpdateBalance = UpdateBalance;
+module.exports.SetAuthToken = SetAuthToken;
+module.exports.AuthUser = AuthUser;
