@@ -45,10 +45,11 @@ In the project directory,
 ## API Ref
 
 - PRODUCT ID LIST
-  Fizz => fizz
-  Pop => pop
-  Cola => cola
-  Mega Pop => mega_pop
+
+  - Fizz => fizz
+  - Pop => pop
+  - Cola => cola
+  - Mega Pop => mega_pop
 
 - HTTP GET http://localhost:3001/api/products/
   Fetch all the products data
