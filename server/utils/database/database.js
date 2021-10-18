@@ -24,7 +24,7 @@ products.insert([
     description:
       "An effervescent fruity experience with hints of grape and coriander.",
     cost: 1,
-    quantity: 0,
+    quantity: 100,
   },
   {
     id: 1,

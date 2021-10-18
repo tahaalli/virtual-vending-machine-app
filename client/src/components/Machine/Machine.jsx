@@ -54,7 +54,11 @@ const Machine = () => {
     const soda = sodas.filter((soda) => soda.id === productID)[0];
     // Check balance
     if (balance < soda.cost) {
-      setMessage(`Insufficient Balance! Insert $${soda.cost - balance} more!`);
+      setMessage(
+        `Insufficient Balance! Insert $${(soda.cost - balance).toFixed(
+          2
+        )} more!`
+      );
       return;
     }
     // Checkout API call

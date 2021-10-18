@@ -38,7 +38,7 @@ const AdminControl = () => {
     setQty(Number(event.target.value));
   };
   const handleOnRestock = async () => {
-    if (!qtyID || !qty) return;
+    if (qtyID < 0 || !qty) return;
     // Api Call
     const result = Restock(sodas[qtyID].product_id, qty);
     // Update sodas
@@ -52,13 +52,12 @@ const AdminControl = () => {
     setCostID(Number(event.target.value));
   };
   const handleCostChange = (event) => {
-    if (parseFloat(event.target.value))
-      setCost(parseFloat(event.target.value).toFixed(2));
+    setCost(event.target.value);
   };
   const handleOnChangeCost = async () => {
-    if (!cost || !costID) return;
+    if (costID < 0 || parseFloat(cost) <= 0.0) return;
     // Api Call
-    const result = await Reprice(sodas[costID].product_id, cost);
+    const result = await Reprice(sodas[costID].product_id, parseFloat(cost));
     // Update sodas
     if (result) {
       let _sodas = [...sodas];

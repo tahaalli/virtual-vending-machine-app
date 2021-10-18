@@ -1,10 +1,10 @@
 const express = require("express");
 require("dotenv").config();
-
+const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
-const port = process.env.SERVER_PORT || 3001;
+const port = 3001;
 
 // Import routes
 const products = require("./routes/products/products");
@@ -14,6 +14,9 @@ const restock = require("./routes/product/restock/restock");
 const price = require("./routes/product/price/price");
 const balance = require("./routes/session/balance/balance");
 const auth = require("./routes/session/auth/auth");
+
+app.use(express.static(path.join(__dirname, "../client/build")));
+
 // Middlewares
 app.use(helmet());
 app.use(express.json());
@@ -31,6 +34,10 @@ app.use("/api/session/auth", auth);
 // Ping server
 app.get("/api", (req, res) => {
   res.status(200).send("OK");
+});
+// React
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
 
 app.listen(port, () => {
