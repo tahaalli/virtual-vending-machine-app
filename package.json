@@ -4,6 +4,7 @@
   "description": "Virtual Vending Machine Web App Vue + Express",
   "main": "index.js",
   "scripts": {
+    "client-install": "npm install --prefix client",
     "server": "node server/index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
