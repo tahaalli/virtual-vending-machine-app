@@ -11,7 +11,7 @@ In the project directory,
 
 In the project directory,
 
-1. Run In the project directory,npm run server` to start the express server.
+1. Run `npm run server` to start the express server.
 2. Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 ## Interface
